@@ -1,0 +1,64 @@
+﻿@page "/"
+@using BlazorProject.Shared
+@using Syncfusion.Blazor.Grids
+
+<SfGrid DataSource="@Operations">
+    <GridColumns>
+        <GridColumn Field=@nameof(Operation.Method) HeaderText="Method"></GridColumn>
+        <GridColumn Field=@nameof(Operation.Description) HeaderText="Description"></GridColumn>
+        <GridColumn Field=@nameof(Operation.Url) HeaderText="Url"></GridColumn>
+    </GridColumns>
+</SfGrid>
+
+@code{
+    public List<Operation> Operations { get; set; }
+
+    protected override void OnInitialized()
+    {
+        Operations = LoadData();
+    }
+
+    private List<Operation> LoadData()
+    {
+        Operation o1 = new Operation
+        {
+            Method ="get",
+            Description= "Get a list of all employees",
+            Url = "/api/employees"
+        };
+        Operation o2 = new Operation
+        {
+            Method = "get",
+            Description = "Get an employee by ID",
+            Url = "/api/employees/<id>"
+        };
+        Operation o3 = new Operation
+        {
+            Method = "get",
+            Description = "Search employee by name and gender",
+            Url = "/api/employees/search?name=<Name>&Gender=<0-male,1-female,2-other>"
+        };
+        Operation o4 = new Operation
+        {
+            Method = "post",
+            Description = "Publish information about the employee",
+            Url = "/api/employees"
+        };
+        Operation o5 = new Operation
+        {
+            Method = "put",
+            Description = "Update information about the employee",
+            Url = "/api/employees/<id>"
+        };
+
+        Operation o6 = new Operation
+        {
+            Method = "delete",
+            Description = "Delete employee by id",
+            Url = "/api/employees/<id>"
+        };
+
+
+        return new List<Operation> {o1,o2,o3,o4,o5,o6};
+    }
+}
